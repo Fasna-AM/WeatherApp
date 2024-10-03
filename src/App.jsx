@@ -26,6 +26,8 @@ function App() {
       console.log(error);
       alert("Please Enter correct Location")
       setLocation("")
+      setIsLocationvalid(false)
+
 
     }
     
