@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import { Col, Image, Row } from 'react-bootstrap'
 import cloud from './assets/cloud.png'
 import pressureImg from './assets/pressure.png'
@@ -8,16 +7,12 @@ import humidityImg from './assets/humidity.png'
 const WeatherDetail = ({displayData}) => {
 
     const {main,wind,name} = displayData
-
-  
-  
  
   // console.log(displayData);
   
   
   return (
     <>
-    
     
       <div className='d-flex flex-column justify-content-center align-items-center  text-white' style={{transition:"border 0.5s"}} >
       <Image src={cloud} style={{ width: "10rem",marginTop:"-15px" }} fluid />

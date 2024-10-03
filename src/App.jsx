@@ -1,14 +1,13 @@
 
-import { Alert, Button, FloatingLabel, Form } from 'react-bootstrap'
+import { Button, FloatingLabel, Form } from 'react-bootstrap'
 import './App.css'
 import WeatherDetail from './WeatherDetail'
 import { useState } from 'react'
-import { getWeatherAPI } from './services/allAPI'
+import axios from 'axios'
 
 
 function App() {
   const [location, setLocation] = useState("")
-  const [city, setCity] = useState("kakkanad")
   const [allWeatherDetails, setAllWeatherDetails] = useState({})
   const [isLocationvalid, setIsLocationvalid] = useState(false)
 
@@ -17,34 +16,27 @@ function App() {
 
     try {
 
-      const response = await getWeatherAPI()
-      setAllWeatherDetails(response.data)
-      setCity(response.data.name)
+      const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=8ac5c4d57ba6a4b3dfcf622700447b1e&units=metric`)
 
-      // console.log(city);
+      // console.log(response);
+      setAllWeatherDetails(response.data)
+      setIsLocationvalid(true)
 
     } catch (error) {
       console.log(error);
-
-    }
-    if (location.toLowerCase() == city.toLowerCase()) {
-      setIsLocationvalid(true)
-  
-    }
-    else {
-      setIsLocationvalid(false)
-      alert("Please Enter Correct Location!!")
+      alert("Please Enter correct Location")
       setLocation("")
-    }
-  }
-  
 
+    }
+    
+  }
+   
   return (
 
-    <div className='d-flex flex-column justi-content-center align-items-center'>
+    <div className='d-flex flex-column justi-content-center  align-items-center'>
       <h1 className=" fw-bolder text-white m-5 p-2">Weather App</h1>
       <div className='bg-transparent border rounded w-50  p-4' >
-        <div className=" d-flex justify-content-center align-items-center" >
+        <div className=" d-flex justify-content-center flex-wrap align-items-center" >
 
           <FloatingLabel
             controlId="floatingInput"
